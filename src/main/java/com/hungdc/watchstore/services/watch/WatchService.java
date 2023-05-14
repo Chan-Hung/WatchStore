@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 
 public interface WatchService {
     Watch getWatch(String id);
-    Page<Watch> getListWatch(int page, int size, String sort, String column);
+    Page<Watch> getListWatch(int page, int size);
 
     Watch create (WatchDto dto);
 

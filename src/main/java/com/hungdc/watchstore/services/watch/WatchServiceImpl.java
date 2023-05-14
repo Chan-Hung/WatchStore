@@ -2,10 +2,9 @@ package com.hungdc.watchstore.services.watch;
 
 import com.hungdc.watchstore.dtos.watch.WatchDto;
 import com.hungdc.watchstore.entities.Watch;
-import com.hungdc.watchstore.repositories.WatchRepository;
 import com.hungdc.watchstore.exceptions.InvalidException;
 import com.hungdc.watchstore.exceptions.NotFoundException;
-import com.hungdc.watchstore.utils.PageUtils;
+import com.hungdc.watchstore.repositories.WatchRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -126,14 +125,14 @@ public class WatchServiceImpl implements WatchService {
         return watch;
     }
     @Override
-    public Page<Watch> getListWatch(int page, int size, String sort, String column) {
-        Pageable pageable = PageUtils.createPageable(page, size, sort, column);
+    public Page<Watch> getListWatch(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
         return watchRepository.findAll(pageable);
     }
 
     @Override
     public Page<Watch> searchWatch(String search, int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        return watchRepository.watchSearch(search,pageable);
+        return watchRepository.findByNameContaining(search,pageable);
     }
 }

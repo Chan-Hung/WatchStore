@@ -1,25 +1,24 @@
 package com.hungdc.watchstore.controllers;
 
 import com.hungdc.watchstore.dtos.AccountDto;
-import com.hungdc.watchstore.securities.CustomUserDetailsService;
-import com.hungdc.watchstore.securities.JwtTokenUtils;
-import com.hungdc.watchstore.securities.JwtUserDetails;
 import com.hungdc.watchstore.dtos.TokenDetails;
 import com.hungdc.watchstore.exceptions.InvalidException;
 import com.hungdc.watchstore.exceptions.UserNotFoundAuthenticationException;
+import com.hungdc.watchstore.securities.CustomUserDetailsService;
+import com.hungdc.watchstore.securities.JwtTokenUtils;
+import com.hungdc.watchstore.securities.JwtUserDetails;
 import com.hungdc.watchstore.securities.UserAuthenticationToken;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.security.Principal;
-import java.util.Date;
 
 @Slf4j
 @RestController

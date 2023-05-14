@@ -10,6 +10,5 @@ public interface WatchRepository extends MongoRepository<Watch, String> {
     @Query(value = "{'maDichVu': ?0}", exists = true)
     boolean validateWatchCode(String code);
 
-    @Query(value = "{'code': {$regex: ?0}}")
-    Page<Watch> watchSearch(String code, Pageable pageable);
+    Page<Watch> findByNameContaining(String name, Pageable pageable);
 }

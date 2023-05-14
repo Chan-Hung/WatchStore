@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface AddressRepository extends MongoRepository<Address, String> {
     @Query(value = "{'email': ?0}")
-    Optional<Address> getAddressByEmail(String email);
+    Optional<Address> getByEmail(String email);
 }

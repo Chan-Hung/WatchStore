@@ -1,6 +1,5 @@
 package com.hungdc.watchstore.controllers;
 
-import com.hungdc.watchstore.dtos.order.OrderDto;
 import com.hungdc.watchstore.dtos.watch.WatchDto;
 import com.hungdc.watchstore.entities.Watch;
 import com.hungdc.watchstore.services.watch.WatchService;
@@ -43,19 +42,17 @@ public class WatchController {
     public ResponseEntity<Watch> delete(@PathVariable String id) {
         return new ResponseEntity<>(watchService.delete(id), HttpStatus.OK);
     }
-    @PreAuthorize(value = "hasRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping
     public ResponseEntity<Page<Watch>> getListPagination(@RequestParam int page,
-                                                         @RequestParam int size,
-                                                         @RequestParam String sort,
-                                                         @RequestParam String column){
-        return new ResponseEntity<>(watchService.getListWatch(page, size, sort, column),HttpStatus.OK);
+                                                         @RequestParam int size){
+        return new ResponseEntity<>(watchService.getListWatch(page, size),HttpStatus.OK);
     }
-    @PreAuthorize(value = "hasRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/search")
-    public ResponseEntity<Page<Watch>> search(@RequestParam String search,
+    public ResponseEntity<Page<Watch>> search(@RequestParam String text,
                                              @RequestParam int page,
                                              @RequestParam int size){
-        return new ResponseEntity<>(watchService.searchWatch(search,page,size),HttpStatus.OK);
+        return new ResponseEntity<>(watchService.searchWatch(text,page,size),HttpStatus.OK);
     }
 }

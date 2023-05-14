@@ -25,15 +25,6 @@ public class AddressServiceImpl implements AddressService{
     }
 
     @Override
-    public Address getAddressByEmail(String email) {
-        if (ObjectUtils.isEmpty(email)) {
-            throw new InvalidException("Email khách hàng không được bỏ trống");
-        }
-        return addressRepository.getAddressByEmail(email)
-                .orElseThrow(() -> new NotFoundException("Địa chỉ không tồn tại"));
-    }
-
-    @Override
     public Address create(AddressDto dto) {
         if (ObjectUtils.isEmpty(dto.getEmail())) {
             throw new InvalidException("Email khách hàng không được bỏ trống");

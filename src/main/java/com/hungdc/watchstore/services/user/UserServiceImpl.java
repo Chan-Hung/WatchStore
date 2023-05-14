@@ -7,10 +7,11 @@ import com.hungdc.watchstore.exceptions.NotFoundException;
 import com.hungdc.watchstore.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+
 import java.util.Collections;
+
 import static com.hungdc.watchstore.utils.EnumRole.ROLE_USER;
 
 @Slf4j
@@ -52,7 +53,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setName(dto.getName().trim());
         user.setEmail(dto.getEmail().trim());
-        user.setPassword(new BCryptPasswordEncoder().encode(dto.getPassword()));
+        user.setPassword(dto.getPassword());
         user.setTelephoneNumber(dto.getTelephoneNumber().trim());
         user.setRoles(Collections.singletonList(ROLE_USER.name()));
         userRepository.save(user);
@@ -82,7 +83,7 @@ public class UserServiceImpl implements UserService {
         }
         user.setName(dto.getName().trim());
         user.setEmail(dto.getEmail().trim());
-        user.setPassword(new BCryptPasswordEncoder().encode(dto.getPassword()));
+        user.setPassword(dto.getPassword());
         user.setTelephoneNumber(dto.getTelephoneNumber().trim());
         user.setRoles(Collections.singletonList(ROLE_USER.name()));
         userRepository.save(user);
