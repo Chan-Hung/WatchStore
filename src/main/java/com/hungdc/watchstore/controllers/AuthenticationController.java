@@ -31,8 +31,6 @@ public class AuthenticationController {
 
     private final JwtTokenUtils jwtTokenUtils;
 
-    private final RestTemplate restTemplate = new RestTemplate();
-
     public AuthenticationController(AuthenticationManager authenticationManager, CustomUserDetailsService customUserDetailsService,
                                     JwtTokenUtils jwtTokenUtils) {
         this.authenticationManager = authenticationManager;
@@ -54,10 +52,10 @@ public class AuthenticationController {
         }catch (Exception ex){
             System.out.println(ex.getMessage());
         }
-        final JwtUserDetails userDetails = customUserDetailsService
+        JwtUserDetails userDetails = customUserDetailsService
                 .loadUserByUsername(dto.getUsername());
-        final TokenDetails result = jwtTokenUtils.getTokenDetails(userDetails, null);
-        log.info(String.format("UserRepository %s login at %s", dto.getUsername(), new Date()));
+        TokenDetails result = jwtTokenUtils.getTokenDetails(userDetails, null);
+
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

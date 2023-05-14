@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -19,14 +20,9 @@ public class Order {
     @Id
     private String id;
 
-    //Email user
     private String email;
 
     private Long shippingFee;
 
-    private String address;
-
     private List<Item> items;
-
-    private boolean state = true;
 }

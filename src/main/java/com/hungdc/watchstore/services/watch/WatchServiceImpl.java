@@ -3,10 +3,13 @@ package com.hungdc.watchstore.services.watch;
 import com.hungdc.watchstore.dtos.watch.WatchDto;
 import com.hungdc.watchstore.entities.Watch;
 import com.hungdc.watchstore.repositories.WatchRepository;
-import com.hungdc.watchstore.dtos.order.OrderDto;
 import com.hungdc.watchstore.exceptions.InvalidException;
 import com.hungdc.watchstore.exceptions.NotFoundException;
+import com.hungdc.watchstore.utils.PageUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -35,7 +38,7 @@ public class WatchServiceImpl implements WatchService {
             throw new InvalidException("Tên đồng hồ không được bỏ trống");
         }
         if (ObjectUtils.isEmpty(dto.getMachine())) {
-            throw new InvalidException("Thông tin về loại máy không được bỏ trống");
+            throw new InvalidException("Thông tin về máy cơ không được bỏ trống");
         }
         if (ObjectUtils.isEmpty(dto.getOrigin())) {
             throw new InvalidException("Thông tin về xuất xứ không được bỏ trống");
@@ -43,17 +46,30 @@ public class WatchServiceImpl implements WatchService {
         if (ObjectUtils.isEmpty(dto.getWaterResistant())) {
             throw new InvalidException("Thông tin về kháng nước không được bỏ trống");
         }
-
+        if (ObjectUtils.isEmpty(dto.getProductImages())) {
+            throw new InvalidException("Hình ảnh đồng hồ không được bỏ trống");
+        }
+        if (ObjectUtils.isEmpty(dto.getPrice())) {
+            throw new InvalidException("Giá đồng hồ không được bỏ trống");
+        }
+        if (ObjectUtils.isEmpty(dto.getCategory())) {
+            throw new InvalidException("Loại đồng hồ không được bỏ trống");
+        }
         if (watchRepository.validateWatchCode(dto.getCode().trim().toUpperCase())) {
             throw new InvalidException(String.format("Đồng hồ có mã %s đã tồn tại",
                     dto.getCode()));
         }
         Watch watch = new Watch();
+
         watch.setCode(dto.getCode().trim().toUpperCase());
         watch.setName(dto.getName().trim());
         watch.setMachine(dto.getMachine().trim());
         watch.setOrigin(dto.getOrigin());
         watch.setWaterResistant(dto.getWaterResistant());
+        watch.setProductImages(dto.getProductImages());
+        watch.setPrice(dto.getPrice());
+        watch.setCategory(dto.getCategory());
+
         this.watchRepository.save(watch);
         return watch;
     }
@@ -76,6 +92,15 @@ public class WatchServiceImpl implements WatchService {
         if (ObjectUtils.isEmpty(dto.getWaterResistant())) {
             throw new InvalidException("Thông tin về kháng nước không được bỏ trống");
         }
+        if (ObjectUtils.isEmpty(dto.getProductImages())) {
+            throw new InvalidException("Hình ảnh đồng hồ không được bỏ trống");
+        }
+        if (ObjectUtils.isEmpty(dto.getPrice())) {
+            throw new InvalidException("Giá đồng hồ không được bỏ trống");
+        }
+        if (ObjectUtils.isEmpty(dto.getCategory())) {
+            throw new InvalidException("Loại đồng hồ không được bỏ trống");
+        }
         if (!watch.getCode().equalsIgnoreCase(dto.getCode().trim())
                 && this.watchRepository.validateWatchCode(dto.getCode().trim().toUpperCase())) {
             throw new InvalidException(String.format("Đồng hồ có mã %s đã tồn tại",
@@ -86,7 +111,11 @@ public class WatchServiceImpl implements WatchService {
         watch.setMachine(dto.getMachine().trim());
         watch.setOrigin(dto.getOrigin());
         watch.setWaterResistant(dto.getWaterResistant());
-        this.watchRepository.save(watch);
+        watch.setProductImages(dto.getProductImages());
+        watch.setPrice(dto.getPrice());
+        watch.setCategory(dto.getCategory());
+
+        watchRepository.save(watch);
         return watch;
     }
 
@@ -95,5 +124,16 @@ public class WatchServiceImpl implements WatchService {
         Watch watch = getWatch(id);
         this.watchRepository.delete(watch);
         return watch;
+    }
+    @Override
+    public Page<Watch> getListWatch(int page, int size, String sort, String column) {
+        Pageable pageable = PageUtils.createPageable(page, size, sort, column);
+        return watchRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Watch> searchWatch(String search, int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return watchRepository.watchSearch(search,pageable);
     }
 }

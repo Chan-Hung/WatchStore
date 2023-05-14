@@ -1,5 +1,6 @@
 package com.hungdc.watchstore.securities;
 
+import com.hungdc.watchstore.entities.User;
 import com.hungdc.watchstore.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,13 +23,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public JwtUserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        com.hungdc.watchstore.entities.User user = this.userRepository.getTaiKhoan(email)
+        User user = this.userRepository.getUserByEmail(email)
                 .orElseThrow(() ->
                         new UsernameNotFoundException(String.format("Tài khoản có email %s không tồn tại", email)));
         return getUserDetails(user);
     }
 
-    private JwtUserDetails getUserDetails(com.hungdc.watchstore.entities.User user) {
+    private JwtUserDetails getUserDetails(User user) {
         return new JwtUserDetails(
                 user.getName(),
                 user.getEmail(),

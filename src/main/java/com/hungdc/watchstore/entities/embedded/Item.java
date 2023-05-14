@@ -10,10 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Item {
-    //watch id
-    private String watch;
+    //watch code
+    private String watchCode;
 
     private Integer quantity;
-
-    private Long price;
 }

@@ -12,13 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by: IntelliJ IDEA
- * UserRepository      : thangpx
- * Date      : 4/11/23
- * Time      : 9:17 PM
- * Filename  : UserRepository
- */
 @Getter
 @Setter
 @NoArgsConstructor

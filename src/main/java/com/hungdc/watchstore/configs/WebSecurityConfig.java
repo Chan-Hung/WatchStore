@@ -29,9 +29,6 @@ public class WebSecurityConfig {
 
     private final UserAuthenticationProvider userAuthenticationProvider;
 
-    private final List<String> pattern = Arrays.asList("/api/login/**");
-
-
     public WebSecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, JwtTokenFilter jwtTokenFilter,
                              UserAuthenticationProvider userAuthenticationProvider) {
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
@@ -43,7 +40,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests()
-                .antMatchers(HttpMethod.POST, pattern.toArray(new String[0])).permitAll()
+                .antMatchers(HttpMethod.POST, "/api/user" ,"/api/login/**").permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

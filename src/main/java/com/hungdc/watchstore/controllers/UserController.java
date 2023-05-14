@@ -24,19 +24,18 @@ public class UserController {
         return new ResponseEntity<>(userService.getTaiKhoan(id), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<User> create(@Valid @RequestBody UserDto dto) {
         return new ResponseEntity<>(userService.create(dto), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/{id}")
     public ResponseEntity<User> update(@PathVariable String id, @Valid @RequestBody UserDto dto) {
         return new ResponseEntity<>(userService.update(id, dto), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/{id}")
     public ResponseEntity<User> delete(@PathVariable String id) {
         return new ResponseEntity<>(userService.delete(id), HttpStatus.OK);

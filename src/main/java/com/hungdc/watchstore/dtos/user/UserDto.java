@@ -16,13 +16,12 @@ import java.util.List;
 public class UserDto {
     private String name;
 
-    // email không được trùng nhau
     private String email;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY, value = "password")
     private String password;
 
-    private String dienThoai;
+    private String telephoneNumber;
 
     private List<String> roles = new ArrayList<>();
 }

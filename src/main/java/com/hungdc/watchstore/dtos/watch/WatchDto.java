@@ -1,6 +1,6 @@
 package com.hungdc.watchstore.dtos.watch;
 
-import com.hungdc.watchstore.entities.embedded.EmbeddedCategory;
+import com.hungdc.watchstore.entities.embedded.ProductImage;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WatchDto {
-    //code is unique
     private String code;
 
     private String name;
@@ -25,5 +24,9 @@ public class WatchDto {
 
     private String waterResistant;
 
-    private List<EmbeddedCategory> embeddedCategories = new ArrayList<>();
+    private List<ProductImage> productImages = new ArrayList<>();
+
+    private Long price;
+
+    private String category;
 }

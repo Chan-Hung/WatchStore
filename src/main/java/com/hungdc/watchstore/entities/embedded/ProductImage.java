@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmbeddedCategory {
+public class ProductImage {
     //category Id
-    private String category;
+    private String path;
 
-    private String name;
+    private Boolean isThumbnail;
 }

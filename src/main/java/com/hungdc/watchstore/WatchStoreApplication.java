@@ -19,11 +19,11 @@ public class WatchStoreApplication implements CommandLineRunner {
         SpringApplication.run(WatchStoreApplication.class, args);
     }
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         if(userRepository.count()==0){
             com.hungdc.watchstore.entities.User user = new com.hungdc.watchstore.entities.User("hungdc","20110072@student.hcmute.edu.vn","123456789",
                     Arrays.asList(EnumRole.ROLE_ADMIN.name()));
-            this.userRepository.save(user);
+            userRepository.save(user);
         }
     }
 }

@@ -1,23 +1,17 @@
 package com.hungdc.watchstore.entities;
 
-import com.hungdc.watchstore.entities.embedded.EmbeddedCategory;
+import com.hungdc.watchstore.entities.embedded.ProductImage;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by: IntelliJ IDEA
- * UserRepository      : thangpx
- * Date      : 4/11/23
- * Time      : 9:35 PM
- * Filename  : WatchRepository
- */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -27,7 +21,7 @@ public class Watch {
     @Id
     private String id;
 
-    //code is unique
+    @Indexed(unique = true)
     private String code;
 
     private String name;
@@ -38,7 +32,9 @@ public class Watch {
 
     private String waterResistant;
 
-    private List<EmbeddedCategory> embeddedCategories = new ArrayList<>();
+    private List<ProductImage> productImages = new ArrayList<>();
 
-    private boolean state = true;
+    private Long price;
+
+    private String category;
 }

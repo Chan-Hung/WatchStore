@@ -1,9 +1,9 @@
 package com.hungdc.watchstore.controllers;
 
 import com.hungdc.watchstore.dtos.category.CategoryDto;
-import com.hungdc.watchstore.dtos.watch.WatchDto;
 import com.hungdc.watchstore.entities.Category;
 import com.hungdc.watchstore.services.category.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

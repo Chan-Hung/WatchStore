@@ -7,8 +7,6 @@ import com.hungdc.watchstore.entities.Category;
 public interface CategoryService {
     Category getCategory(String id);
     Category create (CategoryDto dto);
-
     Category update (String id, CategoryDto dto);
-
     Category delete (String id);
 }

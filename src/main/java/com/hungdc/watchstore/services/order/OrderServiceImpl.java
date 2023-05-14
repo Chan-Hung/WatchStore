@@ -35,18 +35,15 @@ public class OrderServiceImpl implements OrderService {
         if (ObjectUtils.isEmpty(dto.getShippingFee())) {
             throw new InvalidException("Phí vận chuyển không được bỏ trống");
         }
-        if (ObjectUtils.isEmpty(dto.getAddress())) {
-            throw new InvalidException("Địa chỉ đặt chỗ không được bỏ trống");
-        }
         if (ObjectUtils.isEmpty(dto.getItems())) {
             throw new InvalidException("Các mặt hàng không được bỏ trống");
         }
 
         order.setEmail(dto.getEmail().trim());
         order.setShippingFee(dto.getShippingFee());
-        order.setAddress(dto.getAddress());
         order.setItems(dto.getItems());
-        this.orderRepository.save(order);
+
+        orderRepository.save(order);
         return order;
     }
 
@@ -54,14 +51,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order update(String id, OrderDto dto) {
         Order order = getOrder(id);
+
         if (ObjectUtils.isEmpty(dto.getEmail())) {
             throw new InvalidException("Email đặt hàng không được bỏ trống");
         }
         if (ObjectUtils.isEmpty(dto.getShippingFee())) {
             throw new InvalidException("Phí vận chuyển không được bỏ trống");
-        }
-        if (ObjectUtils.isEmpty(dto.getAddress())) {
-            throw new InvalidException("Địa chỉ đặt chỗ không được bỏ trống");
         }
         if (ObjectUtils.isEmpty(dto.getItems())) {
             throw new InvalidException("Các mặt hàng không được bỏ trống");
@@ -69,9 +64,9 @@ public class OrderServiceImpl implements OrderService {
 
         order.setEmail(dto.getEmail().trim());
         order.setShippingFee(dto.getShippingFee());
-        order.setAddress(dto.getAddress());
         order.setItems(dto.getItems());
-        this.orderRepository.save(order);
+        orderRepository.save(order);
+
         return order;
     }
 

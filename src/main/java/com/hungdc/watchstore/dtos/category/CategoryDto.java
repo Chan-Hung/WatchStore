@@ -17,6 +17,4 @@ public class CategoryDto {
     private String code;
 
     private String name;
-
-    private List<Watch> watches = new ArrayList<>();
 }

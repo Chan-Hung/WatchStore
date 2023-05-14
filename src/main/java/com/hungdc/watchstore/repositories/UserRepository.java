@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface UserRepository extends MongoRepository<User, String> {
     @Query(value = "{'email': ?0}")
-    Optional<User> getTaiKhoan(String email);
+    Optional<User> getUserByEmail(String email);
 
     @Query(value = "{'Email': ?0}", exists = true)
     boolean validateEmail(String Email);
