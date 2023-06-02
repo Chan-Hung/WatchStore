@@ -37,4 +37,5 @@ public class Watch {
     private Long price;
 
     private String category;
+    private Integer quantity;
 }
