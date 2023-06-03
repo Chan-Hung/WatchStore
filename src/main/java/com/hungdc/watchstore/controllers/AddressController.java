@@ -21,6 +21,7 @@ public class AddressController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Address> getAddress(@PathVariable String id) {
+        System.out.println(addressService);
         return new ResponseEntity<>(addressService.getAddress(id), HttpStatus.OK);
     }
     @PreAuthorize("hasRole('USER')")
