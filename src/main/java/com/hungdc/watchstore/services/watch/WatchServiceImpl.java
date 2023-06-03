@@ -68,7 +68,7 @@ public class WatchServiceImpl implements WatchService {
         watch.setProductImages(dto.getProductImages());
         watch.setPrice(dto.getPrice());
         watch.setCategory(dto.getCategory());
-
+        watch.setQuantity(dto.getQuantity());
         this.watchRepository.save(watch);
         return watch;
     }
@@ -113,7 +113,7 @@ public class WatchServiceImpl implements WatchService {
         watch.setProductImages(dto.getProductImages());
         watch.setPrice(dto.getPrice());
         watch.setCategory(dto.getCategory());
-
+        watch.setQuantity(dto.getQuantity());
         watchRepository.save(watch);
         return watch;
     }

@@ -29,4 +29,5 @@ public class WatchDto {
     private Long price;
 
     private String category;
+    private Integer quantity;
 }

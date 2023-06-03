@@ -25,4 +25,5 @@ public class Order {
     private Long shippingFee;
 
     private List<Item> items;
+    private String status;
 }
